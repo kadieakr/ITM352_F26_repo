@@ -1,5 +1,8 @@
-emotions = ( "surprise", "sad", "fear", "happy" )
+emotions = ("surprise", "sad", "fear", "happy")
 
-is_it_true = emotions[len(emotions)-1] == "happy" and len(emotions) > 3
+if emotions[-1] == "happy" and len(emotions) > 3:
+    is_it_true = True
+else:
+    is_it_true = False
+
 print(is_it_true)
-# print(emotions[3] == "happy" and len(emotions) > 3)
