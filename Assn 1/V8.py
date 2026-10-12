@@ -29,7 +29,7 @@ def update_high_score(score):
     if score > best_score:
         with open(HIGH_SCORE_FILE, "w") as file:
             file.write(str(score))
-        print(f"\n🎉 New high score! {score} correct!")
+        print(f"\nNew high score! {score} correct!")
 
 
 NUM_QUESTIONS_PER_QUIZ = 5
