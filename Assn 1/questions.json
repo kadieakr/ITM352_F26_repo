@@ -1,0 +1,32 @@
+[
+  {
+    "question": "What holiday is during the month of October?",
+    "answer": "Halloween",
+    "options": ["Christmas", "Thanksgiving", "New Year's Day"],
+    "explanation": "Halloween is celebrated in October and is the holiday associated with costumes, pumpkins, and trick-or-treating."
+  },
+  {
+    "question": "What is the capital of Hawaii?",
+    "answer": "Honolulu",
+    "options": ["Waikiki", "Waimea", "Waipahu"],
+    "explanation": "Honolulu is the capital city of Hawaii and is located on the island of Oahu."
+  },
+  {
+    "question": "What is the largest ocean on Earth?",
+    "answer": "Pacific Ocean",
+    "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean"],
+    "explanation": "The Pacific Ocean is the largest and deepest ocean on Earth, covering more area than all land on Earth combined."
+  },
+  {
+    "question": "How many planets are in our solar system?",
+    "answer": "8",
+    "options": ["7", "9", "10"],
+    "explanation": "There are eight planets in our solar system: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune."
+  },
+  {
+    "question": "What city is The Golden Gate Bridge in?",
+    "answer": "San Francisco",
+    "options": ["Los Angeles", "San Diego", "San Jose"],
+    "explanation": "The Golden Gate Bridge spans the entrance to San Francisco Bay and connects San Francisco to Marin County."
+  }
+]
