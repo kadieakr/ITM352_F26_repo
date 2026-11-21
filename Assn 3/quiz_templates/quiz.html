@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Question {{ number }}{% endblock %}
+{% block content %}
+<p>Player: {{ name }}</p>
+<h1>Question {{ number }} of {{ total }}</h1>
+<progress value="{{ progress }}" max="100">{{ progress }}%</progress>
+<p>{{ progress }}% complete</p>
+{% if feedback %}
+    {% if feedback.correct %}<p class="success">Correct!</p>
+    {% else %}<p class="error">The answer was {{ feedback.correct_answer }}.</p>{% endif %}
+    <p>{{ feedback.explanation }}</p>
+{% endif %}
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<form method="post">
+    <fieldset>
+        <legend>{{ question.question }}</legend>
+        {% for choice in choices %}<label class="choice"><input type="radio" name="answer" value="{{ choice }}" required> {{ choice }}</label>{% endfor %}
+    </fieldset>
+    <button>Submit answer</button>
+</form>
+{% endblock %}

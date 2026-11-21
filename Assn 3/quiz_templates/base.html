@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Island Quiz{% endblock %}</title>
+    <style>
+        body { max-width: 700px; margin: 2rem auto; padding: 0 1rem; font: 1rem/1.5 Arial, sans-serif; color: #20304a; background: #f4f7fb; }
+        main { padding: 1.5rem; background: white; border-radius: 12px; }
+        a, button { display: inline-block; margin: .4rem 0; padding: .65rem 1rem; border: 0; border-radius: 7px; background: #315ca8; color: white; text-decoration: none; font: inherit; cursor: pointer; }
+        input[type="text"] { padding: .6rem; font: inherit; }
+        .choice { display: block; margin: .5rem 0; padding: .7rem; border: 1px solid #ccd5e2; border-radius: 7px; }
+        .muted { color: #65738a; }
+        .error { color: #a32121; }
+        .success { color: #176b3a; }
+        progress { width: 100%; }
+        table { width: 100%; text-align: left; }
+    </style>
+</head>
+<body>
+<main>
+    <p><a href="{{ url_for('home') }}">Island Quiz</a></p>
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>

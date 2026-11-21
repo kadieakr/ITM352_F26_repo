@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Results{% endblock %}
+{% block content %}
+<h1>Quiz complete, {{ name }}!</h1>
+<progress value="100" max="100">100%</progress>
+<p>Your score: <strong>{{ result.score }}/{{ result.total }}</strong></p>
+<p>High score: {{ result.high_score }}</p>
+{% if result.new_record %}<p class="success">You set a new high score!</p>{% endif %}
+<h2>Answers</h2>
+<ol>
+    {% for answer in result.answers %}
+        <li><strong>{{ answer.question }}</strong><br>
+            {% if answer.correct %}<span class="success">Correct: {{ answer.selected }}</span>
+            {% else %}<span class="error">You chose {{ answer.selected }}; correct answer: {{ answer.correct_answer }}</span>{% endif %}
+            <p>{{ answer.explanation }}</p>
+        </li>
+    {% endfor %}
+</ol>
+<form method="post" action="{{ url_for('restart') }}"><button>Play again</button></form>
+<p><a href="{{ url_for('home') }}">Home and score history</a></p>
+{% endblock %}
