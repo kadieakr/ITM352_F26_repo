@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Island Quiz{% endblock %}
+{% block title %}The Quiz{% endblock %}
 {% block content %}
 {% if name %}
     <h1>Welcome back, {{ name }}!</h1>
@@ -13,7 +13,7 @@
     {% endif %}
     <form method="post" action="{{ url_for('change_name') }}"><button>Change name</button></form>
 {% else %}
-    <h1>Welcome to Island Quiz</h1>
+    <h1>Welcome to the Quiz</h1>
     <p>Enter your name to play the five-question quiz.</p>
     {% if error %}<p class="error">{{ error }}</p>{% endif %}
     <form method="post">

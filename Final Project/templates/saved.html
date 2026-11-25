@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} | Hawaii Internships{% endblock %}
+{% block content %}
+<h1>{{ title }}</h1>
+{% if items %}
+    <div class="job-list">
+        {% for item in items %}
+            <article class="job-card">
+                <h2>{{ item.title }}</h2>
+                <p class="company">{{ item.company }}</p>
+                <p>Apply by <strong>{{ item.deadline_pretty }}</strong></p>
+                <p><a class="button" href="{{ item.url }}" target="_blank" rel="noopener">View opportunity</a></p>
+                {% if mailto %}
+                    <form method="post" action="{{ url_for('remove_from_cart', internship_id=item.id) }}"><button class="button button-light">Remove from shortlist</button></form>
+                {% else %}
+                    <form method="post" action="{{ url_for('like', internship_id=item.id) }}"><button class="button button-light">Unlike</button></form>
+                {% endif %}
+            </article>
+        {% endfor %}
+    </div>
+    {% if mailto %}<p><a class="button" href="{{ mailto }}">Email this shortlist</a></p>{% endif %}
+{% else %}
+    <p class="empty">{{ empty_text }}</p>
+{% endif %}
+<p><a href="{{ url_for('home') }}">Browse internships</a></p>
+{% endblock %}

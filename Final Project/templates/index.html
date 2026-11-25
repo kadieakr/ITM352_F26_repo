@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Browse Internships | Hawaii Internships{% endblock %}
+{% block content %}
+<h1>Find an internship in Hawaiʻi</h1>
+<p>Browse opportunities, filter the list, and save the ones you want to revisit.</p>
+
+<section class="panel">
+    <h2>Search and filter</h2>
+    <form method="get" action="{{ url_for('home') }}">
+        <div class="filters">
+            {% for field in ["source", "major", "season", "island", "company"] %}
+                <label>{{ field|capitalize }}
+                    <select name="{{ field }}">
+                        <option value="">All</option>
+                        {% for option in options[field] %}
+                            <option value="{{ option }}" {% if filters[field] == option %}selected{% endif %}>{{ option }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+            {% endfor %}
+            <label>Paid
+                <select name="paid">
+                    <option value="">All</option>
+                    <option value="yes" {% if filters.paid == "yes" %}selected{% endif %}>Yes</option>
+                    <option value="no" {% if filters.paid == "no" %}selected{% endif %}>No</option>
+                </select>
+            </label>
+        </div>
+        <p><label><input type="checkbox" name="hide_passed" value="on" {% if filters.hide_passed %}checked{% endif %}> Hide passed deadlines</label></p>
+        <button type="submit">Apply filters</button>
+        <a class="button button-light" href="{{ url_for('home') }}">Clear</a>
+    </form>
+</section>
+
+<h2>{{ internships|length }} opportunities</h2>
+{% if internships %}
+    <div class="job-list">
+        {% for item in internships %}
+            <article class="job-card">
+                <h2>{{ item.title }}</h2>
+                <p class="company">{{ item.company }}</p>
+                <p>Apply by <strong>{{ item.deadline_pretty }}</strong></p>
+                <div class="tags">
+                    <span class="tag">{{ item.island }}</span>
+                    <span class="tag">{{ item.major }}</span>
+                    <span class="tag">{{ item.season }}</span>
+                    {% if item.paid %}<span class="tag">Paid</span>{% endif %}
+                </div>
+                <p class="muted">Source: {{ item.source }}</p>
+                <div class="card-actions">
+                    <a class="button" href="{{ item.url }}" target="_blank" rel="noopener">View opportunity</a>
+                    {% if logged_in %}
+                        {% if item.id in cart %}
+                            <form method="post" action="{{ url_for('remove_from_cart', internship_id=item.id) }}"><button class="button button-light">Remove from shortlist</button></form>
+                        {% else %}
+                            <form method="post" action="{{ url_for('add_to_cart', internship_id=item.id) }}"><button class="button button-light">Add to shortlist</button></form>
+                        {% endif %}
+                        <form method="post" action="{{ url_for('like', internship_id=item.id) }}"><button class="button button-light">{% if item.id in likes %}Unlike{% else %}Like{% endif %}</button></form>
+                    {% endif %}
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="empty">No opportunities match these filters. Try clearing one or more filters.</p>
+{% endif %}
+
+{% if search_links %}
+    <section class="panel" style="margin-top: 24px">
+        <h2>More places to search</h2>
+        {% for link in search_links %}<a class="button button-light" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.name }}</a> {% endfor %}
+    </section>
+{% endif %}
+{% endblock %}

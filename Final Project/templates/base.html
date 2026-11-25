@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Hawaii Internships{% endblock %}</title>
+    <style>
+        :root {
+            --navy: #173b57;
+            --teal: #167d78;
+            --page: #f3f7fa;
+            --text: #243746;
+            --muted: #647987;
+            --line: #dce5eb;
+            --white: #ffffff;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: var(--page);
+            color: var(--text);
+            font: 16px/1.5 Arial, Helvetica, sans-serif;
+        }
+        header { background: var(--navy); color: var(--white); }
+        .header-inner, main, footer { width: min(100% - 32px, 1050px); margin: auto; }
+        .header-inner { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .brand { color: white; text-decoration: none; font-size: 1.25rem; font-weight: bold; }
+        nav { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+        nav a { color: white; text-decoration: none; }
+        nav a:hover { text-decoration: underline; }
+        main { padding: 32px 0; min-height: 75vh; }
+        h1, h2, h3 { color: var(--navy); line-height: 1.2; }
+        h1 { margin-top: 0; }
+        .panel, .job-card { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
+        .panel { margin-bottom: 24px; }
+        .filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; align-items: end; }
+        label { display: block; font-weight: bold; }
+        input, select { width: 100%; margin-top: 5px; padding: 9px; border: 1px solid #bdcbd3; border-radius: 6px; background: white; color: var(--text); font: inherit; }
+        input[type="checkbox"] { width: auto; }
+        button, .button { display: inline-block; padding: 9px 14px; border: 0; border-radius: 6px; background: var(--teal); color: white; font: inherit; font-weight: bold; text-decoration: none; cursor: pointer; }
+        button:hover, .button:hover { background: #116661; }
+        .button-light { background: #e6f2f1; color: var(--navy); }
+        .job-list { display: grid; gap: 14px; }
+        .job-card h2 { margin: 0 0 6px; font-size: 1.25rem; }
+        .company { margin: 0 0 12px; color: var(--muted); font-weight: bold; }
+        .tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0; }
+        .tag { padding: 3px 9px; border-radius: 20px; background: #e8f2f5; color: var(--navy); font-size: .9rem; }
+        .card-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 14px; }
+        .card-actions form { margin: 0; }
+        .flash { padding: 10px 12px; border-radius: 6px; background: #fff3d6; color: #604813; }
+        .empty { color: var(--muted); }
+        footer { padding: 18px 0 28px; color: var(--muted); font-size: .9rem; }
+        @media (max-width: 600px) {
+            .header-inner { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+            main { padding-top: 22px; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header-inner">
+        <a class="brand" href="{{ url_for('home') }}">Hawaii Internships</a>
+        <nav aria-label="Main navigation">
+            <a href="{{ url_for('home') }}">Browse</a>
+            {% if logged_in %}
+                <a href="{{ url_for('cart_page') }}">Shortlist ({{ cart|length }})</a>
+                <a href="{{ url_for('likes_page') }}">Liked ({{ likes|length }})</a>
+                <a href="{{ url_for('logout') }}">Log out</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Log in</a>
+                <a href="{{ url_for('register') }}">Create account</a>
+            {% endif %}
+        </nav>
+    </div>
+</header>
+<main>
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}<p class="flash">{{ message }}</p>{% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</main>
+<footer>Find internship opportunities across Hawaiʻi.</footer>
+</body>
+</html>
